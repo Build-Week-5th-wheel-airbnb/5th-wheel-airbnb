@@ -30,15 +30,14 @@ function findById(id) {
 }
 
 function update(id, changes) {
-  db('users')
+  return db('users')
     .where({ id })
     .update(changes);
-  return db('users');
+ 
 }
 
 function remove(id) {
-  db('users')
+  return db('users')
     .where({ id })
     .del();
-  return find();
 }
