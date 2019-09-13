@@ -12,12 +12,13 @@ const multerS3 = require('multer-s3');
 
 const restricted = require('../auth/restricted-middleware.js');
 const authRouter = require('../auth/auth-router.js');
-// const usersRouter = require('../users/users-router.js');
+const usersRouter = require('../users/users-router.js');
 const propRouter = require('../properties/propRouter');
 const rentalRouter = require('../rentals/rentalRouter');
+ 
 
-//cookies
-const sessionOptions = {
+ const sessionOptions = {
+ 
   name: 'mycookie',
   secret: process.env.SESSION_SECRET || 'chocolate',
   cookie: {
@@ -39,6 +40,7 @@ const sessionOptions = {
   })
 };
 
+  
 const server = express();
 
 server.use(helmet());
@@ -47,11 +49,22 @@ server.use(cors());
 server.use(session(sessionOptions));
 
 server.use('/api/auth', authRouter);
+ 
+ 
 server.use('/api/properties', restricted, propRouter);
 server.use('/api/rentals', restricted, rentalRouter);
+server.use('/api/users', usersRouter);
 
-server.get('/', (req, res) => {
+
+ server.get('/', (req, res) => {
   res.json({ api: 'Welcome to 5th Wheel Air B & B !' });
+});
+server.post('/single', upload.single('test'), (req, res) => {
+  try {
+    res.send(req.file);
+  } catch (err) {
+    res.send(400).statusMessage({ message: 'Error uploading photo' });
+  }
 });
 
 /** AWS catalog */
