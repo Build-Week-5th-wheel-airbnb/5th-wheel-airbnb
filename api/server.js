@@ -54,5 +54,4 @@ server.get('/', (req, res) => {
   res.json({ api: 'Welcome to 5th Wheel Air B & B !' });
 });
 
-
 module.exports = server;
