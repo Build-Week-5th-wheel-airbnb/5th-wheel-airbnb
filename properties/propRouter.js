@@ -39,7 +39,7 @@ const upload = multer({
   // }
 });
 
-router.post('/upload/:id', upload.single('profile'), (req, res, err) => {
+router.post('/upload/:id', upload.single('photo'), (req, res, err) => {
   try {
     const imageUrl = req.file.location;
     const property_id = req.params.id;
