@@ -32,7 +32,7 @@ function findById(id) {
 // this function was changed to work with the Messenger.
 
 
-  function update(id, changes) {
+  function updateM(id, changes) {
   console.log( 'CHANGES',changes)
   db('users')
     .where({ "id":id })
@@ -43,13 +43,17 @@ function findById(id) {
      
    const user = findById(id);
    return user
+function update(id, changes) {
+  return db('users')
+    .where({ id })
+    .update(changes);
+ 
 }
 //   return db('users');
 // }
 
 function remove(id) {
-  db('users')
+  return db('users')
     .where({ id })
     .del();
-  return find();
-}
+}}
