@@ -44,7 +44,7 @@ router.put('/:id',async (req, res)=> {
   console.log("ID",id)
 
   try{
-    const user = await Users.update(id, {messages:req.body.messages});
+    const user = await Users.updateM(id, {messages:req.body.messages});
       // const sender = req.session.user.username;
     console.log('USERS=>',user)
     console.log('777',req.session.user.username)

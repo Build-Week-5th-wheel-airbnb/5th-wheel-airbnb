@@ -59,13 +59,7 @@ server.use('/api/users', usersRouter);
  server.get('/', (req, res) => {
   res.json({ api: 'Welcome to 5th Wheel Air B & B !' });
 });
-server.post('/single', upload.single('test'), (req, res) => {
-  try {
-    res.send(req.file);
-  } catch (err) {
-    res.send(400).statusMessage({ message: 'Error uploading photo' });
-  }
-});
+
 
 /** AWS catalog */
 
@@ -84,6 +78,8 @@ const awsStorage = multerS3({
     cb(null, file.originalname);
   }
 });
+
+ 
 
 const upload = multer({
   /**if you are using local storage than use
@@ -104,5 +100,17 @@ server.post('/upload', upload.single('profile'), (req, res, err) => {
     res.send(400);
   }
 });
+
+
+
+server.post('/single', upload.single('test'), (req, res) => {
+  try {
+    res.send(req.file);
+  } catch (err) {
+    res.send(400).statusMessage({ message: 'Error uploading photo' });
+  }
+});
+
+ 
 
 module.exports = server;
